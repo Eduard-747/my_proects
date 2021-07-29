@@ -1462,9 +1462,6 @@ if(str1 == "fra"){              ////////////////////// for -- fra
 
   std::cout<<std::endl;
   std::cout<<std::endl;
-  std::cout<<std::endl<<arr[1].name<<arr[1].bn;
-  std::cout<<std::endl<<arr[2].name<<arr[2].amb;
-  std::cout<<std::endl;
   file.close();
   return 0;
 }     
