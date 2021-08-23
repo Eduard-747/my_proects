@@ -56,7 +56,7 @@ void vector<T>::push_back(T value) {
         delete [] arr;
         arr = tmp;
         capacity *= 2;
-        delete [] tmp;
+        tmp = nullptr;
     }
     arr[size] = value;
     size++;
