@@ -87,7 +87,7 @@ template<typename T>
 vector<T>::vector(const vector & other) {
     this->size = other.size;
     this->capacity = other.capacity;
-    this->arr = new T [this->capacity];
+    this->arr = new T [other.capacity];
     for(int i = 0;i < size; i++){
     
         this->arr[i] = other.arr[i];
