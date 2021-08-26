@@ -1,6 +1,5 @@
 #include<iostream>
 #include<fstream>
-#include<map>
 #include<vector>
 class KeyAnalyzer {
 public:
@@ -34,7 +33,6 @@ public:
         ofile << variables << std::endl;
         ofile << "functions: "<<functions << std::endl;
         ofile << "functions: "<<std::endl;
-        printFunctionsAndArguments();
         ofile << "overload functions: " << std::endl;
         overload_fun();
         ofile << "Class: " << class_count;
@@ -178,46 +176,33 @@ private:
             if(checkKeys(str)) {
                 std::getline(ifile,str);
                 if(check_FUN(str,strfoo,arguments)) {
-                    fun.emplace(strfoo,arguments);
+		    fun.push_back(strfoo);
                     functions++;
                     arguments = 0;
                 }
             }
         }
     }
-    void overload_fun() {
+   void overload_fun() {
         std::vector<std::string> vec;
-        bool flag = false;
-        for(auto i = fun.begin(),j = ++fun.begin();j != fun.end();) {
-            if(i->first == j->first) {
-                vec.push_back(i->first);
-                flag = true;
-            } else if(flag && i->first != j->first) {
-                flag = false;
-                continue;
+        for(int i = 0;i < fun.size();++i) {
+            for(int j = i + 1; j < fun.size();++j) {
+                if(fun[i] == fun[j]) {
+                    vec.push_back(fun[i]);
+                }
             }
-		++i;
-		++j;
         }
         for(int i = 0; i < vec.size();i++) {
             ofile << vec[i] << std::endl;
         }
     }
-    void printFunctionsAndArguments() {
-        auto it = fun.begin();
-        while (it != fun.end())
-        {
-            ofile << it->first << " arguments: " << it ->second << std::endl;
-            it++;
-        }
-        
-    }
+    
 private:
     std::string *keyWords;
     std::string file_name;
     std::ifstream ifile;
     std::ofstream ofile;
-    std::multimap<std::string,int> fun;
+    std::vector<std::string> fun;
 };
 int main()
 {
