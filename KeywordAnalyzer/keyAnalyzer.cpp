@@ -125,7 +125,6 @@ private:
                 }               
             }
         }
-        ++count;
     }
     void checkArguments(std::string str,int & arguments) {
         std::string strTemp = "";
