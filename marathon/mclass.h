@@ -25,7 +25,6 @@ public:
         return famelname;
     }
     int getPhoneNumber() const {
-        // quantity++;
         return phoneNumber;
     }
     std::string getAddres() const {
