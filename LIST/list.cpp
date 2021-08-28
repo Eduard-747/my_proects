@@ -39,7 +39,6 @@ public:
         if(this == &other) {
             return *this; 
         }
-        //this->head = other.head;
         clear();
         this->size = other.size;
         this->head = new Node<T>(other.head->data);
@@ -110,7 +109,6 @@ int main()
     mList2.push_back(78);
     mList2.push_back(5);
     mList2.push_back(747);
-    //mList2.clear();
     mList2 = mList;
     mList2.printList();
 }
