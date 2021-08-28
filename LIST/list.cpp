@@ -1,5 +1,5 @@
 #include<iostream>
-template<typename T>
+template<typename T> //es im anush hayastani 
 class list {
 public:
     list() {
