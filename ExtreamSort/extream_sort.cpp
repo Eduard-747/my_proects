@@ -40,7 +40,7 @@ int main()
     std::fstream fin;
     std::ifstream ifin;
     std::ofstream ofile;
-    ifin.open("bigNum.txt");
+    ifin.open("many_num.txt");
     int num;
     int count = 0;
     std::vector<int> mArr;
