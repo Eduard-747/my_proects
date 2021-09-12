@@ -15,16 +15,18 @@ public:
         bool hert = true;
         while (flag)
         {
-            if(hert) {
-                xNull = 'X';
-                hert = false;
-            } else {
-                xNull = 'O';
-                hert = true;
-            }
             std::cin >> x >> y ;
-            go(x,y,xNull);
-            flag = checkWin();
+            if(check(x - 1,y - 1)) {
+                if(hert) {
+                    xNull = 'X';
+                    hert = false;
+                } else {
+                    xNull = 'O';
+                    hert = true;
+                }
+                go(x - 1,y - 1,xNull);
+                flag = checkWin();
+            }
         }
     }
     ~game()
@@ -38,23 +40,15 @@ public:
 private:
     void go(int x ,int y,char xNull) 
     {
-        --x; --y;
-        if(check(x,y)) {
-            if(x > 2 && x < 0 && y > 2 && y < 0 ) {
-                
-                std::cout << "SEGMENTATION";
-                return;
-            }
-            if(xNull == 'X' || xNull == 'O') {
-                Gamer obj(x,y,xNull);
-                arr[obj.x][obj.y] = obj;
-            } else {
-                std::cout << "sxal nshan";
-                return;
-            }
-            std::cout << std::endl;
-            print();
-        } 
+        if(xNull == 'X' || xNull == 'O') {
+            Gamer obj(x,y,xNull);
+            arr[obj.x][obj.y] = obj;
+        } else {
+            std::cout << "sxal nshan";
+            return;
+        }
+        std::cout << std::endl;
+        print();
     }
     void print()
     {
@@ -68,11 +62,16 @@ private:
     }
     bool check(int x,int y) 
     {
+        if(x > 2 || x < 0 || y > 2 || y < 0 ) {
+            std::cout << "\nSEGMENTATION\n";
+            return false;
+        }
         if(arr[x][y].xNull == 'X' || arr[x][y].xNull == 'O') {
             std::cout << "inches anum ape!!!!!!!!\n";
             return false;
         } else {
-            return true; }
+            return true; 
+        }
     }
     bool checkWin() 
     {
@@ -110,10 +109,12 @@ private:
         }
         return true;
     }
+    
 private:
-    struct Gamer {
+    class Gamer {
+    public:
         Gamer() {
-            xNull = '-';
+            this->xNull = '-';
         }
         Gamer(int x,int y,char xNull) {
             this->x = x;
@@ -124,6 +125,7 @@ private:
         int y;
         char xNull;
     };
+
 private:
     Gamer ** arr = new Gamer *[3];
 };
