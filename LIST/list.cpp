@@ -1,100 +1,136 @@
-#include<iostream>
+#include "list.h"
 template<typename T>
-class list {
-public:
-    list() {
-        size = 0;
-        head = nullptr;
-    }
-    void push_back(T value) {
-        if(head == nullptr) {
-            head = new Node<T>(value);
-        } else {
-            Node<T> * tmp = this->head;
-            while(tmp->pNext != nullptr) {
-                tmp = tmp->pNext;
-            }
-            tmp -> pNext = new Node<T>(value);
-        }
-        size++;
-    }
-    void push_front(T value) {
-        head = new Node<T>(value,head);
-        size++;
-    }
-    list (const list& other) {
-        this->size = other.size;
-        this->head = other.head;
-        Node<T> * tmp = other.head;
-        Node<T> * cur = head;
-        while (tmp->pNext != nullptr)
+void list<T>::push_back(T value) 
+{
+    if(head == nullptr) {
+        head = new Node<T>(value);
+    } else {
+        Node<T> * tmp = this->head;
+        while(tmp->pNext != nullptr) 
         {
             tmp = tmp->pNext;
-            cur = new Node<T>(tmp->data);
-            cur = cur->pNext;
         }
+        tmp -> pNext = new Node<T>(value);
     }
+    size++;
+}
 
-    list &operator =(const list & other) {
-        if(this == &other) {
-            return *this; 
-        }
-        clear();
-        this->size = other.size;
-        this->head = new Node<T>(other.head->data);
-        Node<T> * tmp = other.head->pNext;
-        Node<T>* cur = head;
-        while (tmp != nullptr)
+template<typename T>
+void list<T>::push_front(T value)
+{
+    head = new Node<T>(value,head);
+    size++;
+}
+
+template<typename T>
+list<T>::list(const list& other) 
+{
+    this->size = other.size;
+    this->head = other.head;
+    Node<T> * tmp = other.head;
+    Node<T> * cur = head;
+    while (tmp->pNext != nullptr)
+    {
+        tmp = tmp->pNext;
+        cur = new Node<T>(tmp->data);
+        cur = cur->pNext;
+    }
+}
+
+template<typename T>
+list<T> & list<T>::operator =(const list & other) 
+{
+    if(this == &other) {
+        return *this; 
+    }
+    clear();
+    this->size = other.size;
+    this->head = new Node<T>(other.head->data);
+    Node<T> * tmp = other.head->pNext;
+    Node<T>* cur = head;
+    while (tmp != nullptr)
+    {
+        cur->pNext = new Node<T>(tmp->data);
+        tmp = tmp->pNext;
+        cur = cur->pNext;
+    }
+    return *this;
+}
+
+template<typename T>
+void list<T>::insert(T data,int index) 
+{
+    if(index == 0) {
+        push_front(data);
+    } else {
+        Node<T> * prev = this->head;
+        for(int i = 0;i < index - 1; i++) 
         {
-            cur->pNext = new Node<T>(tmp->data);
-            tmp = tmp->pNext;
-            cur = cur->pNext;
+            prev = prev->pNext;
         }
-        return *this;
+        Node<T> *newNode = new Node<T>(data,prev->pNext);
+        prev = newNode;
+        size++;
     }
+}
 
-    void printList() {
-        if(head == nullptr) {
-            std::cout << 0;
-            return;
-        }
-        Node<T>* cur = head;
+template<typename T>
+void list<T>::printList() 
+{
+    if(head == nullptr) {
+        std::cout << 0;
+        return;
+    }
+    Node<T>* cur = head;
+    while (cur)
+    {
         std::cout << cur->data << " ";
-        while (cur->pNext != nullptr)
-        {
-            cur = cur->pNext;
-            std::cout << cur->data << " ";
-        }
-        std::cout<<std::endl;
+        cur = cur->pNext;
     }
-    void pop_front(){
-        Node<T> * tmp = head;
-        head = head->pNext;
-        delete tmp;
-        size--;
+    std::cout << std::endl;
+}
+
+template<typename T>
+void list<T>::pop_front()
+{
+    Node<T> * tmp = head;
+    head = head->pNext;
+    delete tmp;
+    size--;
+}
+
+template<typename T>
+void list<T>::pop_back() 
+{
+    Node<T> * tmp1 = new Node<T>();
+    tmp1 = tmp1->pNext;
+    Node<T> * tmp2 = head;
+    for(int i = 0;i < size - 1; ++i) 
+    {
+        tmp1 = new Node<T>(tmp2->data,tmp1) ;
+        tmp2 = tmp2->pNext;
     }
-    void clear() {
-        while (size) {
-            pop_front();
-        }
+    tmp2 = tmp2->pNext;
+    while(tmp1) 
+    {
+        tmp2 = new Node<T>(tmp1->data,tmp2) ;
+        tmp1 = tmp1 -> pNext;
     }
-    ~list() {
-        clear();
-    }   
-private:
-    template<typename Ti>
-    class Node {
-    public:
-        Node * pNext;
-        T data;
-        Node(T data = T(),Node *pNext = nullptr) {
-            this->data = data;
-            this->pNext = pNext;
-        }
-    };
-    int size;
-    Node<T> *head;
-};
+
+    head = tmp2;
+    delete tmp1;
+    --size;
+}
+
+template<typename T>
+void list<T>::clear() 
+{
+    while (size) 
+    {
+        pop_front();
+    }
+}
+
 int main()
 {
     list<int> mList;    
@@ -102,13 +138,14 @@ int main()
     mList.push_back(9);
     mList.push_back(1);
     mList.push_back(1213);
-    mList.push_front(23);
+    mList.push_back(23);
+    mList.pop_back();
+    
+    list<int> mList2;
+    mList2.push_back(9);
+    mList2.push_back(1);
+    mList2.push_back(1213);
+    mList2.push_back(23);
+    mList = mList2 ;
     mList.printList();
-    list<int> mList2;    
-    mList2.push_back(0);
-    mList2.push_back(78);
-    mList2.push_back(5);
-    mList2.push_back(747);
-    mList2 = mList;
-    mList2.printList();
 }
