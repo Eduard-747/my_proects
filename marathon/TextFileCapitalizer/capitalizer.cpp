@@ -1,7 +1,6 @@
 #include<iostream>
 #include<fstream>
 #include<vector>
-
 class capitalizer {
 public:
     capitalizer(std::string fileName)
@@ -12,57 +11,43 @@ public:
     }
     void change()
     {
-        std::string text;
         std::string str;
-        ofin.open("llll.txt");
+        ofin.open("ModifiedFile.txt");
         while(!ifin.eof())
         {
-            str = "";
-            std::getline(ifin,str);
-            
-            // text += changeLine(str);
-            changeLine(str);
+            std::getline(ifin, str);
+            str = changeLine(str);
             ofin << str ;
-            // ofin << std::endl;
-            std::cout << str;
-            std::cout << std::endl;
-            // text += "\n";
         } 
         ifin.close();
-        // std::cout << text;
-        
-        // ofin << text;
     }
 
 private:
-
     void checkFile() 
     {
         if(!ifin.is_open()) {
-            std::cout << "Aydpisi fayl goyutyun chuni!!!" << std::endl;
+            std::cerr << "There is no such file !!!" << std::endl;
+            exit(1) ;
         }
     }
-
-    std::string changeLine(std::string &str)
+    std::string changeLine(const std::string &str)
     {
         std::string strTmp;
         std::string strLine;
 
         for(int i = 0;i < str.size() + 1;i++) {
             if(str[i] >= 'A' && str[i] <= 'z' ) {
-
                 strTmp += str[i];
             } else {
                 changeWord(strTmp);
                 strLine += strTmp;
                 strLine += " ";
-                // strLine += str[i];
                 strTmp = "";
 
             }
 
         }
-        str = strLine;
+        strLine.push_back('\n') ;
         return strLine;
     }
     void changeWord(std::string &str)
@@ -74,6 +59,7 @@ private:
             str[str.size() - 1] -= 32;
         }
     }
+
 private:
     std::ifstream ifin;
     std::ofstream ofin;
