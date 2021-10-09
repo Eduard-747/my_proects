@@ -1,26 +1,4 @@
-#include<iostream>
-template<typename T>
-class vector
-{
-public:
-    vector();
-    vector(int colum,T value);
-    void push_back(T value);
-    void push_back(T value,int index);
-    void pop_back();
-    T getSize() const { return size; }
-    T getCapacity() const { return capacity; }
-    vector(const vector & other);
-    vector & operator=(const vector & other);
-    T operator[] (int index);
-    void shrink_to_fit();
-    ~vector();
-private:
-    T * arr;
-    int size;
-    int capacity;
-};
-
+#include"vector.h"
 template<typename T>
 vector<T>::vector()
 {
@@ -50,7 +28,7 @@ template<typename T>
 void vector<T>::push_back(T value) {
     if(capacity == size) {
         T *tmp = new T[capacity * 2];
-        for(int i = 0; i < capacity;i++) {
+        for(int i = 0; i < capacity ;i++) {
             tmp[i] = arr[i];
         }
         delete [] arr;
@@ -89,7 +67,6 @@ vector<T>::vector(const vector & other) {
     this->capacity = other.capacity;
     this->arr = new T [other.capacity];
     for(int i = 0;i < size; i++){
-    
         this->arr[i] = other.arr[i];
     }
 }
@@ -112,10 +89,27 @@ vector<T> & vector<T>::operator=(const vector & other){
 
 template<typename T>
 T vector<T>::operator[](int index) {
-    return arr[index];
+    return *(arr+index);
 }
 
 template<typename T>
 void vector<T>::shrink_to_fit() {
     capacity = size;
+}
+
+int main()
+{
+    vector<int> vec;
+    vec.push_back(34) ;
+    vec.push_back(352) ;
+    vec.push_back(999) ;
+    vec.push_back(673) ;
+    vec.push_back(12) ;
+    vector<int>::iterator it = vec.begin() ;
+    it += 2 ;
+    vec.erease(it) ;
+    for(vector<int>::iterator i = vec.begin() ; i != vec.end() ; ++i) {
+        std::cout << *i << std::endl ;
+    }
+
 }
