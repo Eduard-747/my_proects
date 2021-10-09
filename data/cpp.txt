@@ -1,4 +1,0 @@
-creat entity person , name : string , age : int
-insert into person , name = valod , age = 27 , car = red
-update person , age = 28 , where name = valod or car = red
-select age from person where name = hayk
