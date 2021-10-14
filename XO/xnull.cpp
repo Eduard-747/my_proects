@@ -67,7 +67,7 @@ private:
             std::cout << "\n SEGMENTATION \n" ;
             return false ;
         }
-        if(arr[x][y].xNull == 'X' || arr[x][y].xNull == 'O') {
+        else if(arr[x][y].xNull == 'X' || arr[x][y].xNull == 'O') {
             std::cout << "inches anum ape!!!!!!!!\n";
             return false ;
         } else {
