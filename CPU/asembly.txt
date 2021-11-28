@@ -1,0 +1,2 @@
+cr_mov cr_eax,4 : 
+cr_print cr_eax :
