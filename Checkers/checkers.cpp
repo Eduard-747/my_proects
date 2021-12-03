@@ -25,16 +25,27 @@ void Board::move()
 {
     int fx ;
     int fy ;
-    std::cout << "enter figure x: " ;
-    std::cin >> fx ;
-    std::cout << "enter figure y: " ;
-    std::cin >> fy ;
     int x ;
     int y ;
-    std::cout << "enter board x: " ;
-    std::cin >> x ;
-    std::cout << "enter board y: " ;
-    std::cin >> y ;
+    while(true) 
+    {
+        std::cout << "enter figure x: " ;
+        std::cin >> fx ;
+        std::cout << "enter figure y: " ;
+        std::cin >> fy ;
+        std::cout << "enter board x: " ;
+        std::cin >> x ;
+        std::cout << "enter board y: " ;
+        std::cin >> y ;
+        if(!std::cin.good()) {
+            std::cin.clear() ;
+            std::cin.get() ;
+            std::cout << std::endl ;
+            continue ;
+        } else {
+            break ;
+        }
+    }
     if(turn) {
     if((board[x][y].get_color() == empty && board[fx][fy].get_color() == white) && (x == fx - 1 && (y == fy - 1 || y == fy + 1 ))) {
         board[x][y].set_color( board[fx][fy].get_color() ) ;
