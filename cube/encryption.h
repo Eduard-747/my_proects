@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 class encryption
 {
@@ -17,6 +18,8 @@ public:
 	std::string start_encryption(const std::string&) ;
 private:
 	std::vector<std::string> cubes ;
+	std::map<char,void(encryption::*)()> m  {{'U',&encryption::up},{'D',&encryption::down},{'L',&encryption::left},{'R',&encryption::right}};
+
 } ;
 
 #endif
