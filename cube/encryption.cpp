@@ -31,7 +31,6 @@ std::string encryption::get_text() const
 }
 std::string encryption::start_encryption(const std::string& key = "RUD") 
 {
-	std::map<char,void(encryption::*)()> m  {{'U',&encryption::up},{'D',&encryption::down},{'L',&encryption::left},{'R',&encryption::right}};
 	std::for_each(key.begin(),key.end(),[&](const char & ch) {
 		(this->*m[ch])();
 	}) ;
