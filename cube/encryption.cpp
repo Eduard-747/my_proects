@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <map>
 
 namespace constants {
 	const int cube_size { 8 } ;
@@ -30,24 +31,9 @@ std::string encryption::get_text() const
 }
 std::string encryption::start_encryption(const std::string& key = "RUD") 
 {
-	std::for_each(key.begin(),key.end(),[&](const char & ch){
-		switch (ch)
-		{
-		case 'U':
-			up() ;
-			break;
-		case 'D':
-			down() ;
-			break;
-		case 'L':
-			left() ;
-			break;
-		case 'R':
-			right() ;
-			break;
-		default:
-			break;
-		}
+	std::map<char,void(encryption::*)()> m  {{'U',&encryption::up},{'D',&encryption::down},{'L',&encryption::left},{'R',&encryption::right}};
+	std::for_each(key.begin(),key.end(),[&](const char & ch) {
+		(this->*m[ch])();
 	}) ;
 	return key ;
 }
