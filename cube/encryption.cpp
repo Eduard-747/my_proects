@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <algorithm>
-#include <map>
 
 namespace constants {
 	const int cube_size { 8 } ;
