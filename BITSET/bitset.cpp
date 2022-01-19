@@ -1,6 +1,5 @@
 #include "bitset.h"
 
-#include <iostream>
 #include <map>
 
 template <size_t N>
