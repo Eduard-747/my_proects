@@ -54,19 +54,23 @@ namespace myl {
         class iterator: public std::iterator<std::forward_iterator_tag,T>
         {
         public:
-            iterator(T * p = nullptr);
+            iterator(Node<T> * node = nullptr);
             iterator(const iterator&);
             iterator& operator=(const iterator&);
             iterator(iterator&&);
             iterator& operator=(iterator&&);
         public:
-            T& operator++();
-            T& operator++(int);
-            bool operator!=(const iterator& other) const ;
-            T& operator*() const ;
+            iterator& operator++();
+            iterator operator++(int);
+            bool operator!=(const iterator& other) const;
+            const T& operator*() const;
+            T& operator*();
         private:
-            T* it;
+            Node<T>* it;
         };
+    public:
+        iterator begin();
+        iterator end();
     };
 }
 
