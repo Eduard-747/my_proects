@@ -24,27 +24,27 @@ namespace myl
 		Node<T>* tail{};
 	public:
 		class iterator: public std::iterator<std::bidirectional_iterator_tag, T>
-        {
-        public:
-            iterator(Node<T> * node = nullptr);
-            iterator(const iterator&);
-            iterator& operator=(const iterator&);
-            iterator(iterator&&) noexcept;
-            iterator& operator=(iterator&&) noexcept;
-        public:
-            iterator& operator++();
-			iterator operator++(int);
-			iterator& operator--();
-            iterator operator--(int);
-            bool operator!=(const iterator& other) const;
-            const T& operator*() const;
-            T& operator*();
-			T* operator->();
-			friend iterator list<T>::insert(iterator,const T&);
-			friend void list<T>::erase(iterator);
-        private:
-            Node<T>* it;
-        };
+		{
+		public:
+		    iterator(Node<T> * node = nullptr);
+		    iterator(const iterator&);
+		    iterator& operator=(const iterator&);
+		    iterator(iterator&&) noexcept;
+		    iterator& operator=(iterator&&) noexcept;
+		public:
+		    iterator& operator++();
+		    iterator operator++(int);
+		    iterator& operator--();
+		    iterator operator--(int);
+		    bool operator!=(const iterator& other) const;
+		    const T& operator*() const;
+		    T& operator*();
+		    T* operator->();
+		    friend iterator list<T>::insert(iterator,const T&);
+		    friend void list<T>::erase(iterator);
+		private:
+		    Node<T>* it;
+		};
 	public:
 		list() = default;
 		list(const list&);
