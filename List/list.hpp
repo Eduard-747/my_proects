@@ -1,4 +1,3 @@
-
 template <typename T>
 myl::list<T>::list(const list<T>& other)
 {
