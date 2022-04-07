@@ -1,5 +1,19 @@
 #include <iostream>
 
+bool isPrime(int num);
+int returnPrime(int n);
+
+int main()
+{
+  
+  std::cout << "Enter N - ";
+  int N;
+  std::cin >> N;
+  std::cout << "N - th prime number is: " << returnPrime(N) << std::endl;
+
+  return 0;
+}
+
 bool isPrime(int num)
 {
   for (int i = 2; i <= num / 2; ++i)
@@ -23,16 +37,5 @@ int returnPrime(int n)
       return i;
     }
   }
-  return 0;
-}
-
-int main()
-{
-  
-  std::cout << "Enter N - ";
-  int N;
-  std::cin >> N;
-  std::cout << "N - th prime number is: " << returnPrime(N) << std::endl;
-
   return 0;
 }
