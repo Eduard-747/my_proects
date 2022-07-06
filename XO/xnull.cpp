@@ -1,4 +1,5 @@
 #include<iostream>
+
 class game {
 public:
     game() {
@@ -6,6 +7,7 @@ public:
             arr[i] = new Gamer[3];
         }
     }
+    
     void gaming() 
     {
         int x ;
@@ -33,6 +35,7 @@ public:
             }
         }
     }
+    
     ~game()
     {
         std::cout << "\n!!! the game finsh !!!\n" ;
@@ -41,6 +44,7 @@ public:
         } 
         delete [] arr ;
     }
+    
 private:
     void go(int x ,int y,char xNull) 
     {
@@ -51,6 +55,7 @@ private:
         std::cout << std::endl ;
         print() ;
     }
+    
     void print()
     {
         for(int i = 0; i < 3;i++) {
@@ -61,6 +66,7 @@ private:
         }
         std::cout << std::endl;
     }
+    
     bool check(int x,int y) 
     {
         if(x > 2 || x < 0 || y > 2 || y < 0 ) {
@@ -74,6 +80,7 @@ private:
             return true ;
         }
     }
+    
     bool checkWin() 
     {
         for(int i = 0; i < 3; ++i) {
@@ -122,11 +129,13 @@ private:
         Gamer() {
             this->xNull = '-' ;
         }
+        
         Gamer(int x,int y,char xNull) {
             this->x = x ;
             this->y = y ;
             this->xNull = xNull ;
         }
+        
         int x ;
         int y ;
         char xNull ;
